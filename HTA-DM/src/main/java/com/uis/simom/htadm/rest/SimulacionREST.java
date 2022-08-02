@@ -24,20 +24,19 @@ public class SimulacionREST {
 	
 	
 	@Autowired
-	private SimulacionService simulacionService;
+	private SimulacionService simulacionService;	
+	
 	
 	@GetMapping
 	private ResponseEntity<List<Simulacion>> getAllActividades(){
 		return ResponseEntity.ok(simulacionService.findAll());
 	}
-	
-	
 
-	@Autowired
-	private ModeloSimulacion modeloSimulacion;
+	
 	@GetMapping("frami/{edad}")
 	private ModeloSimulacion  simuFra(@PathVariable Integer edad) {
-		modeloSimulacion.calcularRiesgo(50,61,1,1.60,1, 1,2000, 5, 1, 70, 120, 80,80,2, 0,10,0 , 30, 0, 20, 10, 20,1 ,1, 1,1, edad,1);
+		ModeloSimulacion modeloSimulacion = new ModeloSimulacion();
+		modeloSimulacion.calcularRiesgo(50, edad,1,1.60,1, 1,2000, 5, 1, 70, 120, 80,80,2, 0, 10, 0, 30, 0, 20, 10, 20, 1, 1, 1, 1, 0, 1);
 		
 		return modeloSimulacion;
 	}
