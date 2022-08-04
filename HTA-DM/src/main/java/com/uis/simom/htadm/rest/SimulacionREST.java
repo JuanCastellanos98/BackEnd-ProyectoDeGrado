@@ -1,47 +1,46 @@
- package com.uis.simom.htadm.rest;
-
-
+package com.uis.simom.htadm.rest;
 
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uis.simom.htadm.service.SimulacionService;
 import com.uis.simom.htadm.model.Simulacion;
+//import com.uis.simom.htadm.model.SimulacionPaciente;
 import com.uis.simom.htadm.model.ModeloSimulacion;
 
 
 @RestController
 @RequestMapping("/simulaciones/")
 public class SimulacionREST {
-	
-	
-	
+
 	@Autowired
-	private SimulacionService simulacionService;	
-	
-	
+	private SimulacionService simulacionService;
+
 	@GetMapping
-	private ResponseEntity<List<Simulacion>> getAllActividades(){
+	private ResponseEntity<List<Simulacion>> getAllActividades() {
 		return ResponseEntity.ok(simulacionService.findAll());
 	}
 
-	
-	@GetMapping("frami/{edad}")
-	private ModeloSimulacion  simuFra(@PathVariable Integer edad) {
+	@GetMapping("frami/")
+	private ModeloSimulacion simuFra(@RequestBody Simulacion simulacionpaciente) {
+		//Simulacion simulacionpaciente= simulacionService.save(simulacion);
 		ModeloSimulacion modeloSimulacion = new ModeloSimulacion();
-		modeloSimulacion.calcularRiesgo(50, edad,1,1.60,1, 1,2000, 5, 1, 70, 120, 80,80,2, 0, 10, 0, 30, 0, 20, 10, 20, 1, 1, 1, 1, 0, 1);
+		System.out.println(simulacionpaciente);
+		modeloSimulacion.calcularRiesgo(simulacionpaciente.getEdad(), simulacionpaciente.getTiempo(),
+				simulacionpaciente.getSexo(), simulacionpaciente.getAltura(), simulacionpaciente.getHerencia(),
+				simulacionpaciente.getFumar(), simulacionpaciente.getCalorias(), simulacionpaciente.getUpDownCalorias(),
+				simulacionpaciente.getUpDown(), simulacionpaciente.getPeso(), simulacionpaciente.getSbp(),
+				simulacionpaciente.getDbp(), simulacionpaciente.getSemanaC(), simulacionpaciente.getSemanaF(), 0, 10, 0, 30, 0, 20, 10, 20, 1, 1, 1, 1, 0, 1);
 		
 		return modeloSimulacion;
+		
 	}
-	
 
 }
-
-

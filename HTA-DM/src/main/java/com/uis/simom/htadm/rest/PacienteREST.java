@@ -36,9 +36,11 @@ public class PacienteREST {
 		
 		try {
 			Paciente pacienteGuardado= PacienteService.save(paciente);
+			
 			return ResponseEntity.created(new URI("/pacientes/"+pacienteGuardado.getId())).body(pacienteGuardado);
-
+			
 		} catch (Exception e) {
+			
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		
