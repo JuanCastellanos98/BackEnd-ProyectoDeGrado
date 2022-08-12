@@ -28,11 +28,11 @@ public class SimulacionREST {
 		return ResponseEntity.ok(simulacionService.findAll());
 	}
 
-	@GetMapping("frami/")
+	@GetMapping("frami")
 	private ModeloSimulacion simuFra(@RequestBody Simulacion simulacionpaciente) {
-		//Simulacion simulacionpaciente= simulacionService.save(simulacion);
+		
 		ModeloSimulacion modeloSimulacion = new ModeloSimulacion();
-		System.out.println(simulacionpaciente);
+		//System.out.println(simulacionpaciente);
 		modeloSimulacion.calcularRiesgo(simulacionpaciente.getEdad(), simulacionpaciente.getTiempo(),
 				simulacionpaciente.getSexo(), simulacionpaciente.getAltura(), simulacionpaciente.getHerencia(),
 				simulacionpaciente.getFumar(), simulacionpaciente.getCalorias(), simulacionpaciente.getUpDownCalorias(),
