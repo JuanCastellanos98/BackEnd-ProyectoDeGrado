@@ -33,8 +33,12 @@ public class SimulacionREST {
 				simulacionpaciente.getSexo(), simulacionpaciente.getAltura(), simulacionpaciente.getHerencia(),
 				simulacionpaciente.getFumar(), simulacionpaciente.getCalorias(), simulacionpaciente.getUpDownCalorias(),
 				simulacionpaciente.getUpDown(), simulacionpaciente.getPeso(), simulacionpaciente.getSbp(),
-				simulacionpaciente.getDbp(), simulacionpaciente.getSemanaC(), simulacionpaciente.getSemanaF(), 0, 10, 0,
-				30, 0, 20, 10, 20, 1, 1, 1, 1, 0, 1);
+				simulacionpaciente.getDbp(), simulacionpaciente.getSemanaC(), simulacionpaciente.getSemanaF(),
+				simulacionpaciente.getMet1(), simulacionpaciente.getMet2(), simulacionpaciente.getMet3(),
+				simulacionpaciente.getMet4(), simulacionpaciente.getMet5(), simulacionpaciente.getT1(),
+				simulacionpaciente.getT2(), simulacionpaciente.getT3(), simulacionpaciente.getT4(),
+				simulacionpaciente.getT5(), simulacionpaciente.getAntecedentesDM2(), simulacionpaciente.getAli(),
+				simulacionpaciente.getNiv_glu(), simulacionpaciente.getMed_HTA(), simulacionpaciente.getPer_abd());
 		return modeloSimulacion;
 
 	}

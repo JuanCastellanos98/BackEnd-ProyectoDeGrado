@@ -695,7 +695,7 @@ public class ModeloSimulacion {
 	public void calcularRiesgo(int edad, int tiempo, int sexo, double altura, int herencia, int fumar, double calorias,
 			double upDownCalorias, int upDown, double peso, int sbp, int dbp, int semanaC, int semanaF, int met1,
 			int met2, int met3, int met4, int met5, int t1, int t2, int t3, int t4, int t5, int antecedentesDM2,
-			int ali, int niv_glu, int med_HTA) {
+			int ali, int niv_glu, int med_HTA, int per_abd) {
 
 		// Declaracion de parametros por sectores
 		// Riesgo hta
@@ -746,6 +746,8 @@ public class ModeloSimulacion {
 		// Sector peso
 		double P = PAct;
 		double EI = EI_d;
+		double Sub_Cal;
+		double Baj_Cal;
 		// ********************************************************************//
 
 		// Declaracion de auxiliares para el while
@@ -760,7 +762,7 @@ public class ModeloSimulacion {
 
 		// Declaración de variables auxiliares
 		// DM2
-		double Riesgo_DM2 = 1;
+		double Riesgo_DM2;
 		// AUXILIARES
 		double Ed_c;
 		double cig_c;
@@ -809,6 +811,21 @@ public class ModeloSimulacion {
 		double R_HTA;
 
 		double Sum_F;
+		//Riesgo DM2
+		int Pun_ant;
+		int Pun_ali;
+		int Pun_act_fis;
+		int Pun_niv_glu;
+		int Pun_med_HTA;
+		int Tabla_per_hom;
+		int Tabla_per_muj;
+		int Per_Sex;
+		int Tabla_edad;
+		int Tabla_IMC;
+		int Sum_puntos;
+		
+		
+		
 
 		// Declaracion de flujos
 		// AUXILIARES
@@ -822,9 +839,11 @@ public class ModeloSimulacion {
 		double DC;
 		double AP;
 		double DP;
-		int aux2 = 0;
+		int aux2 = 0; //para contar el numero de iteraciones
+		double aux3;
+		
 
-		while (tiempoI <= tiempoF) {
+		while (tiempoI < tiempoF+1) {
 			// auxiliares
 			if (Mom_d == 0) {
 				Ed_c = 10000;
@@ -836,6 +855,7 @@ public class ModeloSimulacion {
 			} else {
 				cig_c = (Eact * 365) + (Mom_cc * 7);
 			}
+			aux3=(Ed_c/365)-Eact;
 
 			// presion arterial
 			Dif_p = P - PAct;
@@ -882,14 +902,21 @@ public class ModeloSimulacion {
 			P5 = ((met5 - 1) * (((1.15 / 0.9) * t5) / 1440)) / (BEE / (0.0175 * 1440 * P_re));
 			PAL = P1 + P2 + P3 + P4 + P5;
 			// Sector peso
-			if (T_tra <= Ed_c) {
-				Dec_d = op_CalExt;
+			if(T_tra<=Ed_c) {
+				Sub_Cal=1;
+			}else {
+				Sub_Cal=3;
+			}
+			if(T_tra<=Ed_c) {
+				Baj_Cal=0;
+			}else {
+				Baj_Cal=2;
+			}
+			
+			if (op_CalExt==1) {
+				Dec_d =Sub_Cal ;
 			} else {
-				if (op_CalExt == 1) {
-					Dec_d = 0;
-				} else {
-					Dec_d = 1;
-				}
+				Dec_d =Baj_Cal;
 			}
 			T_com = PAL;
 			if (S == 0) {
@@ -929,6 +956,102 @@ public class ModeloSimulacion {
 			R_IMC = IMC * C_BMI;
 			Sum_F = Beta + R_DBP + R_Her + R_Cig + R_IMC + R_ExDBP + R_SBP + R_Ed + R_se;
 			Ec_HTA = (1 - Math.exp(-Math.exp((Math.log(1) - Sum_F) / scala))) * 100;
+			
+			if(antecedentesDM2==0) {
+				Pun_ant=0;
+			}else {
+				if(antecedentesDM2==1) {
+					Pun_ant=3;
+				}else {
+					Pun_ant=5;
+				}
+			}
+			if(ali==0) {
+				Pun_ali=0;
+			}else {
+				Pun_ali=1;
+			}
+			if(PAL>0) {
+				Pun_act_fis=0;
+			}else {
+				Pun_act_fis=2;
+			}
+			
+			if(per_abd<94) {
+				Tabla_per_hom=0;
+			}else {
+				if(per_abd<102) {
+					Tabla_per_hom=3;
+				}else {
+					Tabla_per_hom=4;
+				}
+			}
+			if(per_abd<80) {
+				Tabla_per_muj=0;
+			}else {
+				if(per_abd<88) {
+					Tabla_per_muj=3;
+				}else {
+					Tabla_per_muj=4;
+				}
+			}
+			if(S==1) {
+				Per_Sex=Tabla_per_muj;
+			}else {
+				Per_Sex=Tabla_per_hom;
+			}
+			if(Ed<45) {
+				Tabla_edad=0;
+			}else {
+				if(Ed<54) {
+					Tabla_edad=2;
+				}else {
+					if(Ed<64) {
+						Tabla_edad=3;
+					}else {
+						Tabla_edad=4;
+					}
+				}
+			}
+			
+			if(IMC<25) {
+				Tabla_IMC=0;
+			}else {
+				if(IMC<30) {
+					Tabla_IMC=1;
+				}else {
+					Tabla_IMC=3;
+				}
+			}
+			if(niv_glu==1) {
+				Pun_niv_glu=5;
+			}else {
+				Pun_niv_glu=0;
+			}
+			if(med_HTA==1) {
+				Pun_med_HTA=2;
+			}else {
+				Pun_med_HTA=0;
+			}
+			Sum_puntos=Pun_ant+Pun_ali+Pun_act_fis+Tabla_edad+Tabla_IMC+Pun_niv_glu+Pun_med_HTA+Per_Sex;
+			if(Sum_puntos<7) {
+				Riesgo_DM2=1;
+			}else {
+				if(Sum_puntos<11) {
+					Riesgo_DM2=4;
+				}else {
+					if(Sum_puntos<14) {
+						Riesgo_DM2=17;
+					}else {
+						if(Sum_puntos<20) {
+							Riesgo_DM2=33;
+						}else {
+							Riesgo_DM2=50;
+						}
+					}
+				}
+			}
+			
 			if (Cont == 1) {
 				if (Ec_HTA < 100) {
 					R_HTA = Ec_HTA;
@@ -938,6 +1061,7 @@ public class ModeloSimulacion {
 					this.listPal.add(PAL);
 					this.listImc.add(IMC);
 					this.listPeso.add(P);
+					
 					// System.out.println("lEDAD= " + lEDAD + " lHTA= " + lHTA);
 				} else {
 					R_HTA = 100;
@@ -986,12 +1110,12 @@ public class ModeloSimulacion {
 				F_pdef = 0;
 			}
 			if (Dec_d == 1) {
-				AC = Cal_Ex;
+				AC = (Cal_Ex/aux3);
 			} else {
 				AC = 0;
 			}
 			if (Dec_d == 0) {
-				DC = Cal_Ex;
+				DC = (Cal_Ex/aux3);
 			} else {
 				DC = 0;
 			}
@@ -1028,8 +1152,8 @@ public class ModeloSimulacion {
 			EI = EI + (AC * pasoSimu) - (DC * pasoSimu);
 
 			tiempoI = tiempoI + pasoSimu;
-			// System. out. println(tiempoI+" "+"riesgo="+lHTA);
-
+			//System. out. println("EDAD: "+aux2+" R_DBP:"+R_DBP+" R_Her: "+R_Her+" R_Cig: "+R_Cig+" R_IMC: "+R_IMC+" R_ExDBP: "+R_ExDBP +" R_SBP "+R_SBP+" R_Ed:"+R_Ed+" R_se: "+R_se);
+			//System. out. println("EDAD: "+aux2+" SBP: "+SBP+" DBP: "+DBP);
 		} // fin while
 
 	}
