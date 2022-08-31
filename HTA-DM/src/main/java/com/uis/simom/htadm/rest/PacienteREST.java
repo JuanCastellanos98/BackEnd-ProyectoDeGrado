@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uis.simom.htadm.service.PacienteService;
+
 import com.uis.simom.htadm.model.Paciente;
 
 @RestController
@@ -44,6 +45,20 @@ public class PacienteREST {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		
+	}
+	
+	@PostMapping("loginPaciente/")
+	private int  login(@RequestBody Paciente paciente) {
+		Paciente resenf=new Paciente();
+		int resplog;
+		resenf=PacienteService.findAllByCC(paciente.getCc());
+		if(paciente.getPassword().equals(resenf.getPassword())) {
+			resplog=2;
+		}else {
+			resplog=0;
+		}
+		System.out.print(resplog);
+		return resplog;
 	}
 	
 

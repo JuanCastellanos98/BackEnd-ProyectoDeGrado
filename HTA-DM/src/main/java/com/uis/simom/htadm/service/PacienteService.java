@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 
+
 import com.uis.simom.htadm.model.Paciente;
 import com.uis.simom.htadm.repository.PacienteRepository;
 
@@ -25,6 +26,19 @@ public class PacienteService implements PacienteRepository{
 		// TODO Auto-generated method stub
 		return pacienteRepository.findAll();
 	}
+	
+	public Paciente findAllByCC(String cc){
+		Paciente respuestaPaciente=new Paciente();
+		List<Paciente> paciente= pacienteRepository.findAll();
+		for(int i=0; i<paciente.size();i++) {
+			if(paciente.get(i).getCc().equals(cc)   ) {
+				respuestaPaciente=(paciente.get(i));
+				//System.out.print("entro");
+			}
+		}
+		return respuestaPaciente;
+	}
+	
 
 	@Override
 	public List<Paciente> findAll(Sort sort) {

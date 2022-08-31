@@ -2,6 +2,7 @@ package com.uis.simom.htadm.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Enfermero {
 	private int id;
 	private String nombre;
 	private String apellido;
+	@Column(unique=true)
 	private String cc;
 	private String password;
     private LocalDateTime create_at;

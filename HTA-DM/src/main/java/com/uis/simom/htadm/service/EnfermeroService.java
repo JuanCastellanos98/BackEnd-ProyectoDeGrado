@@ -1,5 +1,6 @@
 package com.uis.simom.htadm.service;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -25,6 +26,18 @@ public class EnfermeroService implements EnfermeroRepository {
 	public List<Enfermero> findAll() {
 		// TODO Auto-generated method stub
 		return enfermeroRepository.findAll();
+	}
+	
+	public Enfermero findAllByCC(String cc){
+		Enfermero respuestaEnfermero=new Enfermero();
+		List<Enfermero> enfermero= enfermeroRepository.findAll();
+		for(int i=0; i<enfermero.size();i++) {
+			if(enfermero.get(i).getCc().equals(cc)   ) {
+				respuestaEnfermero=(enfermero.get(i));
+				//System.out.print("entro");
+			}
+		}
+		return respuestaEnfermero;
 	}
 
 	@Override
@@ -86,6 +99,8 @@ public class EnfermeroService implements EnfermeroRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 	@Override
 	public Enfermero getById(Long id) {

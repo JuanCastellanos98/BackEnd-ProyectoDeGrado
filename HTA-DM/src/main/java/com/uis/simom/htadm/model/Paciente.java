@@ -3,7 +3,7 @@ package com.uis.simom.htadm.model;
 
 import java.time.LocalDateTime;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +23,7 @@ public class Paciente {
 	private int id;
 	private String apellido;
 	private String barrio;
+	@Column(unique=true)
 	private String cc;
 	private String celular;
 	private String ciudad;
