@@ -30,14 +30,14 @@ public class EnfermeroREST {
 	}
 	
 	@PostMapping("loginEnfermero/")
-	private int login(@RequestBody Enfermero enfermero) {
+	private Enfermero login(@RequestBody Enfermero enfermero) {
 		Enfermero resenf=new Enfermero();
-		int resplog;
+		Enfermero resplog=new Enfermero();;
 		resenf=enfermeroService.findAllByCC(enfermero.getCc());
 		if(enfermero.getPassword().equals(resenf.getPassword())) {
-			resplog=1;
+			resplog=resenf;
 		}else {
-			resplog=0;
+			resplog=null;
 		}
 		System.out.print(resplog);
 		return resplog;

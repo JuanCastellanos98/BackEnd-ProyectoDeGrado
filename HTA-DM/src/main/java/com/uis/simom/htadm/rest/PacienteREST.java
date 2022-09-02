@@ -48,14 +48,14 @@ public class PacienteREST {
 	}
 	
 	@PostMapping("loginPaciente/")
-	private int  login(@RequestBody Paciente paciente) {
+	private Paciente  login(@RequestBody Paciente paciente) {
 		Paciente resenf=new Paciente();
-		int resplog;
+		Paciente resplog=new Paciente();
 		resenf=PacienteService.findAllByCC(paciente.getCc());
 		if(paciente.getPassword().equals(resenf.getPassword())) {
-			resplog=2;
+			resplog=resenf;
 		}else {
-			resplog=0;
+			resplog=null;
 		}
 		System.out.print(resplog);
 		return resplog;
