@@ -28,7 +28,7 @@ public class Paciente {
 	private String celular;
 	private String ciudad;
 	
-    private String create_at;
+    private LocalDateTime create_at=LocalDateTime.now();
 	private String direccion;
 	private String email;
     private LocalDateTime fec_nac;
@@ -42,7 +42,7 @@ public class Paciente {
 	}
 	
 	
-	public Paciente(int id, String apellido, String barrio, String cc, String celular, String ciudad, String create_at,
+	public Paciente(int id, String apellido, String barrio, String cc, String celular, String ciudad, LocalDateTime create_at,
 			String direccion, String email, LocalDateTime fec_nac, String nombre, String password, String sexo,
 			String tipo_doc) {
 		super();
@@ -97,10 +97,10 @@ public class Paciente {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
-	public String getCreate_at() {
+	public LocalDateTime getCreate_at() {
 		return create_at;
 	}
-	public void setCreate_at(String create_at) {
+	public void setCreate_at(LocalDateTime create_at) {
 		this.create_at = create_at;
 	}
 	public String getDireccion() {

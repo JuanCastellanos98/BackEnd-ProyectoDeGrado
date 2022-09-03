@@ -23,7 +23,7 @@ public class Enfermero {
 	@Column(unique=true)
 	private String cc;
 	private String password;
-    private LocalDateTime create_at;
+    private LocalDateTime create_at=LocalDateTime.now();;
 	
 	public Enfermero() {
 		
