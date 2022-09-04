@@ -35,18 +35,35 @@ public class VisitaService implements VisitaRepository {
 		for(int i=0; i<visita.size();i++) {
 			if(visita.get(i).getEnfermero().getCc().equals(cc)) {
 				respuestaVisita.add(visita.get(i));
-				//System.out.print("entro");
+				
 			}
 		}
 		return respuestaVisita;
 	}
+	public List<Visita> findAllVisitasByPaciente(String cc){
+		List<Visita> respuestaVisita= new ArrayList<>();
+		List<Visita> visita= visitaRepository.findAll();
+		for(int i=0; i<visita.size();i++) {
+			if(visita.get(i).getPaciente().getCc().equals(cc)) {
+				respuestaVisita.add(visita.get(i));
+			}
+		}
+		return respuestaVisita;
+	}
+	
 	public List<Paciente> findAllPacientesByEnfermero(String cc){
 		List<Paciente> respuestaVisitaPaciente= new ArrayList<>();
 		List<Visita> visita= visitaRepository.findAll();
+		int respuestasRepetidas=0;
 		for(int i=0; i<visita.size();i++) {
 			if(visita.get(i).getEnfermero().getCc().equals(cc)) {
-				respuestaVisitaPaciente.add(visita.get(i).getPaciente());
-				//System.out.print("entro");
+				if(respuestaVisitaPaciente.contains(visita.get(i).getPaciente())) {
+					respuestasRepetidas=respuestasRepetidas+1;
+				}else {
+					respuestaVisitaPaciente.add(visita.get(i).getPaciente());
+					}
+				
+				
 			}
 		}
 		return respuestaVisitaPaciente;

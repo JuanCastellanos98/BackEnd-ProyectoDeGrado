@@ -27,6 +27,11 @@ public class VisitaREST {
 	private ResponseEntity<List<Visita>> getAllActividades() {
 		return ResponseEntity.ok(visitaService.findAll());
 	}
+	@GetMapping("visitaPaciente/{ccPacientes}")
+	private ResponseEntity<List<Visita>> getAllVisitasByPaciente(@PathVariable("ccPacientes") String ccPaciente){
+		System.out.print(ccPaciente);
+		return ResponseEntity.ok(visitaService.findAllVisitasByPaciente(ccPaciente));
+	}
 	
 	
 	@GetMapping("{enfermeroPacientes}")

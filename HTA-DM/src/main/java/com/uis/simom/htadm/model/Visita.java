@@ -1,6 +1,7 @@
 package com.uis.simom.htadm.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+//import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,7 +59,7 @@ public class Visita {
 	private String estres;
 	private String dieta;
 	private String ejercicio;
-	private LocalDateTime create_at=LocalDateTime.now();;
+	private LocalDate create_at=LocalDate.now();;
 	
 	
 	public Visita() {
@@ -73,7 +74,7 @@ public class Visita {
 			int tiempo, int met1, int met2, int met3, int met4, int met5, int t1, int t2, int t3, int t4, int t5,
 			int med_HTA, int niv_glu, int per_abd, int ali, int antecedentesDM2, Enfermero enfermero,
 			String recomendaciones, String observaciones, String dormir, String alcohol, String estres, String dieta,
-			String ejercicio,LocalDateTime create_at) {
+			String ejercicio,LocalDate create_at) {
 		super();
 		this.id = id;
 		this.altura = altura;
@@ -510,13 +511,13 @@ public class Visita {
 
 
 
-	public LocalDateTime getCreate_at() {
+	public LocalDate getCreate_at() {
 		return create_at;
 	}
 
 
 
-	public void setCreate_at(LocalDateTime create_at) {
+	public void setCreate_at(LocalDate create_at) {
 		this.create_at = create_at;
 	}
 		
