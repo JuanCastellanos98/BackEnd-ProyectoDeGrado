@@ -133,7 +133,7 @@ public class PacienteService implements PacienteRepository{
 	@Override
 	public Optional<Paciente> findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return pacienteRepository.findById(id);
 	}
 
 	@Override

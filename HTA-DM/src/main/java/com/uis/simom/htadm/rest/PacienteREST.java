@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,13 @@ public class PacienteREST {
 	@GetMapping
 	private ResponseEntity<List<Paciente>> getAllActividades(){
 		return ResponseEntity.ok(PacienteService.findAll());
+	}
+	
+	@GetMapping("{id}")
+	private Paciente getOneByid(@PathVariable("id") long idPaciente){
+		Paciente resenf=new Paciente();
+		resenf=PacienteService.getOne(idPaciente);
+		return resenf;
 	}
 	
 	@PostMapping
@@ -60,6 +68,8 @@ public class PacienteREST {
 		System.out.print(resplog);
 		return resplog;
 	}
+	
+	
 	
 
 }

@@ -59,7 +59,7 @@ public class Visita {
 	private String estres;
 	private String dieta;
 	private String ejercicio;
-	private LocalDate create_at=LocalDate.now();;
+	private LocalDate create_at=LocalDate.now();
 	
 	
 	public Visita() {
