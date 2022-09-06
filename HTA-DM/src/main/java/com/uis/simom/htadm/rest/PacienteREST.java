@@ -39,6 +39,13 @@ public class PacienteREST {
 		return resenf;
 	}
 	
+	@GetMapping("cedula/{cc}")
+	private Paciente getOneBycc(@PathVariable("cc") String ccPaciente){
+		Paciente resenf=new Paciente();
+		resenf=PacienteService.buscaPorCedula(ccPaciente);
+		return resenf;
+	}
+	
 	@PostMapping
 	private ResponseEntity<Paciente> savePaciente(@RequestBody Paciente paciente){
 		
