@@ -1,5 +1,6 @@
 package com.uis.simom.htadm.model;
 
+//import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -842,6 +843,7 @@ public class ModeloSimulacion {
 		int aux2 = 0; //para contar el numero de iteraciones
 		double aux3;
 		
+		
 
 		while (tiempoI < tiempoF+1) {
 			// auxiliares
@@ -1055,21 +1057,22 @@ public class ModeloSimulacion {
 			if (Cont == 1) {
 				if (Ec_HTA < 100) {
 					R_HTA = Ec_HTA;
+					
 					this.listRiesgoHTA.add(R_HTA);
 					this.listRiesgoDm2.add(Riesgo_DM2);
 					this.listEdad.add(Ed);
-					this.listPal.add(PAL);
-					this.listImc.add(IMC);
+					this.listPal.add(Math.round(PAL * 1000d) / 1000d);
+					this.listImc.add(Math.round(IMC * 1000d) / 1000d);
 					this.listPeso.add(P);
 					
-					// System.out.println("lEDAD= " + lEDAD + " lHTA= " + lHTA);
+					//System.out.println("PAL= "+df.format(PAL));
 				} else {
 					R_HTA = 100;
 					this.listRiesgoHTA.add(R_HTA);
 					this.listRiesgoDm2.add(Riesgo_DM2);
 					this.listEdad.add(Ed);
-					this.listPal.add(PAL);
-					this.listImc.add(IMC);
+					this.listPal.add(Math.round(PAL * 1000d) / 1000d);
+					this.listImc.add(Math.round(IMC * 1000d) / 1000d);
 					this.listPeso.add(P);
 					// System. out. println(lEDAD);
 				}
