@@ -1063,7 +1063,7 @@ public class ModeloSimulacion {
 					this.listEdad.add(Ed);
 					this.listPal.add(Math.round(PAL * 1000d) / 1000d);
 					this.listImc.add(Math.round(IMC * 1000d) / 1000d);
-					this.listPeso.add(P);
+					this.listPeso.add(P_re);
 					
 					//System.out.println("PAL= "+df.format(PAL));
 				} else {
@@ -1073,7 +1073,7 @@ public class ModeloSimulacion {
 					this.listEdad.add(Ed);
 					this.listPal.add(Math.round(PAL * 1000d) / 1000d);
 					this.listImc.add(Math.round(IMC * 1000d) / 1000d);
-					this.listPeso.add(P);
+					this.listPeso.add(P_re);
 					// System. out. println(lEDAD);
 				}
 			} else {
