@@ -12,7 +12,7 @@ public class Actividad {
 	@Id
 	private int id;
 	private int mets;
-	private String nomb_act;
+	private String nombAct;
 	
 	public Actividad() {
 		
@@ -23,7 +23,7 @@ public class Actividad {
 		super();
 		this.id = id;
 		this.mets = mets;
-		this.nomb_act = nomb_act;
+		this.nombAct = nomb_act;
 	}
 	public int getId() {
 		return id;
@@ -38,10 +38,10 @@ public class Actividad {
 		this.mets = mets;
 	}
 	public String getNomb_act() {
-		return nomb_act;
+		return nombAct;
 	}
 	public void setNomb_act(String nomb_act) {
-		this.nomb_act = nomb_act;
+		this.nombAct = nomb_act;
 	}
 
 }

@@ -23,7 +23,7 @@ public class ActividadService {
 
 	public List<Actividad> findAll() {
 		// TODO Auto-generated method stub
-		return actividadRepository.findAll();
+		return actividadRepository.findAllByOrderByNombActAsc();
 	}
 
 	
