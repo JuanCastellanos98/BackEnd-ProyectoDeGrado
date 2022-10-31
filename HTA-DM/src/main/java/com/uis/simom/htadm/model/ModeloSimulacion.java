@@ -842,6 +842,7 @@ public class ModeloSimulacion {
 		double DP;
 		int aux2 = 0; //para contar el numero de iteraciones
 		double aux3;
+		double Mul_colombia=0.75;
 		
 		
 
@@ -907,7 +908,7 @@ public class ModeloSimulacion {
 			if(T_tra<=Ed_c) {
 				Sub_Cal=1;
 			}else {
-				Sub_Cal=3;
+				Sub_Cal=2;
 			}
 			if(T_tra<=Ed_c) {
 				Baj_Cal=0;
@@ -1056,7 +1057,7 @@ public class ModeloSimulacion {
 			
 			if (Cont == 1) {
 				if (Ec_HTA < 100) {
-					R_HTA = Ec_HTA;
+					R_HTA = Ec_HTA*Mul_colombia;
 					
 					this.listRiesgoHTA.add(R_HTA);
 					this.listRiesgoDm2.add(Riesgo_DM2);
@@ -1065,7 +1066,7 @@ public class ModeloSimulacion {
 					this.listImc.add(Math.round(IMC * 1000d) / 1000d);
 					this.listPeso.add(P_re);
 					
-					//System.out.println("PAL= "+df.format(PAL));
+					
 				} else {
 					R_HTA = 100;
 					this.listRiesgoHTA.add(R_HTA);
@@ -1123,7 +1124,7 @@ public class ModeloSimulacion {
 				DC = 0;
 			}
 			IMC = P_re / (Alt * Alt);
-			if (IMC < 18.5) {
+			if (IMC > 18.5 && IMC<24.9) {
 				EI_ade = TEE;
 			} else {
 				EI_ade = EI;
@@ -1140,7 +1141,13 @@ public class ModeloSimulacion {
 			} else {
 				DP = 0;
 			}
-
+			
+			
+			if (Cont == 1) {
+			System.out.println("ED: "+Ed+"  EI_ade: "+EI_ade+" TEE: "+TEE+" EI: "+EI+ " EB: "+EB);
+			//System.out.println("Peso_cig: "+P_cig+" P: "+P+ " EB: "+ EB +" EI: "+EI);
+			//System.out.println("ED: "+Ed+"AC: "+AC+" DC: "+DC+" Dec_d: "+Dec_d +"  "+ T_tra+" "+Ed_c);
+			}
 			// Niveles
 			// Auxiliares
 			Ed = Ed + Cont;
