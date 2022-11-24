@@ -1144,7 +1144,7 @@ public class ModeloSimulacion {
 			
 			
 			if (Cont == 1) {
-			System.out.println("ED: "+Ed+"  EI_ade: "+EI_ade+" TEE: "+TEE+" EI: "+EI+ " EB: "+EB);
+			//System.out.println("ED: "+Ed+"  EI_ade: "+EI_ade+" TEE: "+TEE+" EI: "+EI+ " EB: "+EB);
 			//System.out.println("Peso_cig: "+P_cig+" P: "+P+ " EB: "+ EB +" EI: "+EI);
 			//System.out.println("ED: "+Ed+"AC: "+AC+" DC: "+DC+" Dec_d: "+Dec_d +"  "+ T_tra+" "+Ed_c);
 			}
